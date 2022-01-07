@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "PostTable")
 data class PostEntity(
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     var postId : Int,
     var postTitle : String,
     var postImg : String,
