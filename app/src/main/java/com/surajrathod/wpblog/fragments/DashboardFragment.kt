@@ -17,22 +17,12 @@ import com.surajrathod.wpblog.adapters.RecyclerViewPostAdapter
 import com.surajrathod.wpblog.databinding.FragmentDashboardBinding
 import com.surajrathod.wpblog.model.PostDetails
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+
+
 lateinit var category0 : CardView
 lateinit var category1 : CardView
 
-
-
-/**
- * A simple [Fragment] subclass.
- * Use the [DashboardFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class DashboardFragment : Fragment() {
-
 
     val postList = arrayListOf<PostDetails>(
         PostDetails(1,"title1","img1","1-1-22","tech","desc","url1"),
@@ -64,7 +54,7 @@ class DashboardFragment : Fragment() {
         if (recyclerView is RecyclerView) {
             with(recyclerView) {
                 layoutManager = LinearLayoutManager(context)
-                adapter = RecyclerViewPostAdapter(postList)
+                adapter = RecyclerViewPostAdapter(postList,1)
             }
         }
 
