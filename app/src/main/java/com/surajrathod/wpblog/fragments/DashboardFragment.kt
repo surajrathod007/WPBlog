@@ -22,6 +22,7 @@ import com.surajrathod.wpblog.model.PostDetails
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 lateinit var category0 : CardView
+lateinit var category1 : CardView
 
 
 
@@ -58,6 +59,7 @@ class DashboardFragment : Fragment() {
 
         val recyclerView = view.findViewById<View>(R.id.postList)
         category0=view.findViewById(R.id.category0)
+        category1=view.findViewById(R.id.category1)
 
         if (recyclerView is RecyclerView) {
             with(recyclerView) {
@@ -67,7 +69,14 @@ class DashboardFragment : Fragment() {
         }
 
         category0.setOnClickListener {
-            findNavController().navigate(R.id.action_dashboardFragment_to_genericPostsFragment)
+            val bundle = Bundle()
+            bundle.putInt("typeOfPost",0)
+            findNavController().navigate(R.id.action_dashboardFragment_to_genericPostsFragment,bundle)
+        }
+        category1.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putInt("typeOfPost",1)
+            findNavController().navigate(R.id.action_dashboardFragment_to_genericPostsFragment,bundle)
         }
     }
 
