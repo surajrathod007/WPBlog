@@ -19,7 +19,9 @@ import com.surajrathod.wpblog.databinding.FragmentDescriptionBinding
 class DescriptionFragment : Fragment() {
 
 
+    val args by navArgs<DescriptionFragmentArgs>()
     lateinit var binding: FragmentDescriptionBinding
+
 
 
 
@@ -35,6 +37,13 @@ class DescriptionFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_description, container, false)
 
         binding = FragmentDescriptionBinding.bind(view)
+
+        binding.apply {
+
+            txtPostTitle.text = args.post.title
+            txtPostDate.text = args.post.date
+            postWebView.loadDataWithBaseURL("",args.post.content,"text/html","UTF-8","")
+        }
 
 
         return view
@@ -53,8 +62,8 @@ class DescriptionFragment : Fragment() {
                 }
             }
         }*/
-        val post by navArgs<DescriptionFragmentArgs>()
-        println(post)
+//        val post by navArgs<DescriptionFragmentArgs>()
+//        println(post)
     }
 
 

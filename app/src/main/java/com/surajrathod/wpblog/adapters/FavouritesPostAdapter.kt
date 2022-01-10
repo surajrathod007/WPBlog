@@ -40,7 +40,7 @@ class FavouritesPostAdapter(var context : Context) : RecyclerView.Adapter<Favour
         var data = dataList[position]
 
         holder.binding.title.text = data.postTitle
-        holder.binding.category.text = data.postCategory
+        //holder.binding.category.text = data.postCategory
         holder.binding.date.text = data.postDate
 
 
