@@ -22,4 +22,8 @@ interface PostDao {
 
     @Query("select * from PostTable where postId = :postId1")
     fun getPostById(postId1 : Int) : PostEntity
+
+
+    @Query("select exists(select * from PostTable where postId = :id)")
+    fun isFav(id : Int): Boolean
 }

@@ -25,6 +25,7 @@ import kotlinx.coroutines.launch
 class DescriptionFragment : Fragment() {
 
 
+    var isFav : Boolean = false
     lateinit var db: PostDatabase
     val args by navArgs<DescriptionFragmentArgs>()
     lateinit var binding: FragmentDescriptionBinding
@@ -57,6 +58,19 @@ class DescriptionFragment : Fragment() {
             binding.txtPostCategory.text = category.category
         }
         Picasso.get().load(args.post.img).into(binding.postImg)
+
+
+        //Fav Button Checking
+
+        GlobalScope.launch {
+
+             isFav = db.PostDao().isFav(args.post.id)
+        }
+
+        if(isFav){
+
+            binding.btnFavourite.setImageResource(R.drawable.ic_baseline_favorite_border_24)
+        }
 
 
         //when fav button is clicked
