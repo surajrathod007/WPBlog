@@ -14,6 +14,33 @@
         android:orientation="vertical"
         tools:context=".fragments.DashboardFragment">
 
+        <RelativeLayout
+            android:id="@+id/offlineCover"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="You are Offline!"
+                android:gravity="center"
+                android:textSize="24sp"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/loadingCover"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ProgressBar
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:layout_centerInParent="true" />
+
+        </RelativeLayout>
+
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appBarLayout"
             android:layout_width="match_parent"
@@ -127,6 +154,7 @@
 
 
         </RelativeLayout>
+
 
 
     </LinearLayout>
