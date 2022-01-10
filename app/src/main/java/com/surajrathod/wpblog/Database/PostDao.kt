@@ -18,4 +18,8 @@ interface PostDao {
 
     @Query("select * from PostTable order by postId desc")
     fun getAllPost() : LiveData<List<PostEntity>>
+
+
+    @Query("select * from PostTable where postId = :postId1")
+    fun getPostById(postId1 : Int) : PostEntity
 }
