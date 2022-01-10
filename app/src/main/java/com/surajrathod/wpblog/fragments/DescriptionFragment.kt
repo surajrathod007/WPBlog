@@ -8,27 +8,29 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.navigation.NavArgs
 import androidx.navigation.fragment.navArgs
 import com.squareup.picasso.Picasso
+import com.surajrathod.wpblog.Database.PostDatabase
+import com.surajrathod.wpblog.Database.PostEntity
 
 
 import com.surajrathod.wpblog.R
 import com.surajrathod.wpblog.databinding.FragmentDescriptionBinding
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 
 class DescriptionFragment : Fragment() {
 
 
+    lateinit var db: PostDatabase
     val args by navArgs<DescriptionFragmentArgs>()
     lateinit var binding: FragmentDescriptionBinding
 
 
-
-
-
-
-    lateinit var postTitle : TextView
+    lateinit var postTitle: TextView
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -39,23 +41,58 @@ class DescriptionFragment : Fragment() {
 
         binding = FragmentDescriptionBinding.bind(view)
 
+        //get database
+
+        db = PostDatabase.getDatabase(requireContext())
+
         binding.apply {
 
             txtPostTitle.text = args.post.title
             txtPostDate.text = args.post.date
-            postWebView.loadDataWithBaseURL("",args.post.content,"text/html","UTF-8","")
+            postWebView.loadDataWithBaseURL("", args.post.content, "text/html", "UTF-8", "")
 
         }
-        val category = categoryList.find{ args.post.category == it.id}
-        if(category!=null)
-        {
+        val category = categoryList.find { args.post.category == it.id }
+        if (category != null) {
             binding.txtPostCategory.text = category.category
         }
         Picasso.get().load(args.post.img).into(binding.postImg)
 
 
+        //when fav button is clicked
+
+        binding.btnFavourite.setOnClickListener {
+
+
+            GlobalScope.launch {
+                db.PostDao().insert(
+
+                    PostEntity(
+                        args.post.id,
+                        args.post.title,
+                        args.post.img,
+                        args.post.date,
+                        args.post.category,
+                        args.post.content,
+                        args.post.url
+                    )
+                )
+            }
+
+            binding.btnFavourite.setImageResource(R.drawable.ic_baseline_favorite_24)
+            Toast.makeText(requireContext(), "Added To Favourites", Toast.LENGTH_SHORT).show()
+        }
+
+
+        //click on favourite
+
 
         return view
+    }
+
+
+    fun checkFav() {
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
