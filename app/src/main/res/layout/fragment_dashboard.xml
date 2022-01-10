@@ -58,9 +58,10 @@
                 android:layout_centerVertical="true">
 
                 <TextView
+                    android:id="@+id/txtCategory0"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="Technology"
+                    android:text="Programming"
                     android:gravity="center"
                     android:textSize="16sp" />
 
@@ -75,13 +76,55 @@
                 android:layout_centerVertical="true">
 
                 <TextView
+                    android:id="@+id/txtCategory1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="sports"
+                    android:text="Programming"
                     android:gravity="center"
                     android:textSize="16sp" />
 
             </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/category2"
+                android:layout_width="100dp"
+                android:layout_height="24dp"
+                android:layout_below="@+id/category0"
+                android:layout_marginHorizontal="24dp"
+                android:layout_marginTop="16dp"
+                android:layout_centerVertical="true">
+
+                <TextView
+                    android:id="@+id/txtCategory2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Programming"
+                    android:gravity="center"
+                    android:textSize="16sp" />
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/category3"
+                android:layout_width="100dp"
+                android:layout_height="24dp"
+                android:text="CardText"
+                android:layout_toRightOf="@+id/category2"
+                android:layout_marginTop="16dp"
+                android:layout_below="@+id/category1"
+                android:layout_marginHorizontal="24dp"
+                android:layout_centerVertical="true">
+
+                <TextView
+                    android:id="@+id/txtCategory3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Programming"
+                    android:gravity="center"
+                    android:textSize="16sp" />
+
+            </androidx.cardview.widget.CardView>
+
 
         </RelativeLayout>
 

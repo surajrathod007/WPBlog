@@ -13,9 +13,10 @@ import com.surajrathod.wpblog.fragments.DashboardFragmentDirections
 import com.surajrathod.wpblog.fragments.categoryList
 import com.surajrathod.wpblog.model.PostDetails
 
-class RecyclerViewPostAdapter (val postList : ArrayList<PostDetails>,val type : Int) : RecyclerView.Adapter<RecyclerViewPostAdapter.ViewHolder>(){
+class RecyclerViewPostAdapter (val postList : List<PostDetails>) : RecyclerView.Adapter<RecyclerViewPostAdapter.ViewHolder>(){
 
     lateinit var view : View
+    private var PostList = arrayListOf<PostDetails>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
         view =LayoutInflater.from(parent.context).inflate(R.layout.post_view_holder,parent,false)
@@ -30,7 +31,7 @@ class RecyclerViewPostAdapter (val postList : ArrayList<PostDetails>,val type : 
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-//        if(type==2) print("this category")
+
         val post = postList[position]
         holder.binding.title.text=post.title
         Picasso.get().load(post.img).into(holder.binding.poster)
