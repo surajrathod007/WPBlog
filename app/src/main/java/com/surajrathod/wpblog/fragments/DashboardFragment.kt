@@ -93,28 +93,32 @@ class DashboardFragment : Fragment() {
                 object : JsonArrayRequest(Request.Method.GET, urlPosts, null, Response.Listener {
                     println("Post API success $it")
 
+                    if(postList.size!=it.length()) {
+                        for (i in 0 until it.length()) {
+                            val jsonObjectPostDetails = it.getJSONObject(i)
+                            val postDetails = PostDetails(
+                                jsonObjectPostDetails.getInt("id"),
+                                jsonObjectPostDetails.getJSONObject("title").getString("rendered"),
+                                jsonObjectPostDetails.getString("jetpack_featured_media_url"),
+                                jsonObjectPostDetails.getString("date").dropLast(9),
+                                jsonObjectPostDetails.getJSONArray("categories").getInt(0),
+                                jsonObjectPostDetails.getJSONObject("content")
+                                    .getString("rendered"),
+                                jsonObjectPostDetails.getString("link")
 
-                    for (i in 0 until it.length()) {
-                        val jsonObjectPostDetails = it.getJSONObject(i)
-                        val postDetails = PostDetails(
-                            jsonObjectPostDetails.getInt("id"),
-                            jsonObjectPostDetails.getJSONObject("title").getString("rendered"),
-                            jsonObjectPostDetails.getString("jetpack_featured_media_url"),
-                            jsonObjectPostDetails.getString("date").dropLast(9),
-                            jsonObjectPostDetails.getJSONArray("categories").getInt(0),
-                            jsonObjectPostDetails.getJSONObject("content").getString("rendered"),
-                            jsonObjectPostDetails.getString("link")
-
-                        )
-                        postList.add(postDetails)
-                    }
-
-                    if (recyclerView is RecyclerView) {
-                        with(recyclerView) {
-                            layoutManager = LinearLayoutManager(context)
-                            adapter = RecyclerViewPostAdapter(postList)
+                            )
+                            postList.add(postDetails)
                         }
                     }
+
+                        if (recyclerView is RecyclerView) {
+                            with(recyclerView) {
+                                layoutManager = LinearLayoutManager(context)
+                                adapter = RecyclerViewPostAdapter(postList)
+                            }
+                        }
+
+
                 }, Response.ErrorListener {
                     println("API failed $it")
                 }) {
