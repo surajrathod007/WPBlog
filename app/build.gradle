@@ -2,6 +2,8 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-kapt'
+    id 'androidx.navigation.safeargs.kotlin'
+    id 'kotlin-parcelize'
 }
 
 android {
@@ -57,6 +59,7 @@ dependencies {
 
     //picasso for Img fetching
     implementation 'com.squareup.picasso:picasso:2.71828'
+
 
 
     //material Components

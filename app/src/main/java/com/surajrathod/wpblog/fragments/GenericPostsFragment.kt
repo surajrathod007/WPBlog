@@ -22,11 +22,7 @@ import com.surajrathod.wpblog.model.PostDetails
  */
 class GenericPostsFragment : Fragment() {
 
-    val postList = arrayListOf<PostDetails>(
-        PostDetails(1,"title1","img1","1-1-22","tech","desc","url1"),
-        PostDetails(2,"title2","img1","1-1-23","tech","desc","url1"),
-        PostDetails(3,"title3","img1","4-1-24","sports","desc","url1")
-    )
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,12 +50,12 @@ class GenericPostsFragment : Fragment() {
             }
 
         }
-        if (recyclerView is RecyclerView) {
+       /* if (recyclerView is RecyclerView) {
             with(recyclerView) {
                 layoutManager = LinearLayoutManager(context)
                 adapter = RecyclerViewPostAdapter(postList,2)
             }
-        }
+        }*/
 
     }
 //    companion object {
