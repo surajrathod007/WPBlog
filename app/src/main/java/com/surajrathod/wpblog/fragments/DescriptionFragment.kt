@@ -13,13 +13,19 @@ import androidx.navigation.fragment.navArgs
 
 
 import com.surajrathod.wpblog.R
+import com.surajrathod.wpblog.databinding.FragmentDescriptionBinding
 
 
 class DescriptionFragment : Fragment() {
 
 
+    lateinit var binding: FragmentDescriptionBinding
 
-lateinit var postTitle : TextView
+
+
+
+
+    lateinit var postTitle : TextView
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -27,6 +33,8 @@ lateinit var postTitle : TextView
         // Inflate the layout for this fragment
 
         val view = inflater.inflate(R.layout.fragment_description, container, false)
+
+        binding = FragmentDescriptionBinding.bind(view)
 
 
         return view
