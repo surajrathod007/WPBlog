@@ -11,7 +11,7 @@ data class PostEntity(
     var postTitle : String,
     var postImg : String,
     var postDate : String,
-    var postCategory : String,
+    var postCategory : Int,
     var postContent : String,
     var postUrl : String
 

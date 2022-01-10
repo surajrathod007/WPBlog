@@ -10,7 +10,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.navigation.NavArgs
 import androidx.navigation.fragment.navArgs
-import com.surajrathod.wpblog.Database.PostEntity
+import com.squareup.picasso.Picasso
 
 
 import com.surajrathod.wpblog.R
@@ -20,11 +20,11 @@ import com.surajrathod.wpblog.databinding.FragmentDescriptionBinding
 class DescriptionFragment : Fragment() {
 
 
-
     val args by navArgs<DescriptionFragmentArgs>()
-
     lateinit var binding: FragmentDescriptionBinding
-    lateinit var favPost : PostEntity
+
+
+
 
 
 
@@ -39,16 +39,19 @@ class DescriptionFragment : Fragment() {
 
         binding = FragmentDescriptionBinding.bind(view)
 
-        //showing views
-
         binding.apply {
 
-            txtPostTitle.text = args.postObject.title
-            txtPostDate.text = args.postObject.date
+            txtPostTitle.text = args.post.title
+            txtPostDate.text = args.post.date
+            postWebView.loadDataWithBaseURL("",args.post.content,"text/html","UTF-8","")
 
         }
-
-
+        val category = categoryList.find{ args.post.category == it.id}
+        if(category!=null)
+        {
+            binding.txtPostCategory.text = category.category
+        }
+        Picasso.get().load(args.post.img).into(binding.postImg)
 
 
 
@@ -68,8 +71,8 @@ class DescriptionFragment : Fragment() {
                 }
             }
         }*/
-        val post by navArgs<DescriptionFragmentArgs>()
-        println(post)
+//        val post by navArgs<DescriptionFragmentArgs>()
+//        println(post)
     }
 
 

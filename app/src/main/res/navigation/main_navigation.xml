@@ -31,7 +31,7 @@
         android:name="com.surajrathod.wpblog.fragments.DescriptionFragment"
         android:label="DescriptionFragment" >
         <argument
-            android:name="PostObject"
+            android:name="post"
             app:argType="com.surajrathod.wpblog.model.PostDetails" />
     </fragment>
 </navigation>
