@@ -13,10 +13,25 @@
         <action
             android:id="@+id/action_dashboardFragment_to_genericPostsFragment"
             app:destination="@id/genericPostsFragment" />
+        <action
+            android:id="@+id/action_dashboardFragment_to_descriptionFragment"
+            app:destination="@id/descriptionFragment" />
     </fragment>
     <fragment
         android:id="@+id/genericPostsFragment"
         android:name="com.surajrathod.wpblog.fragments.GenericPostsFragment"
         android:label="fragment_generic_posts"
-        tools:layout="@layout/fragment_generic_posts" />
+        tools:layout="@layout/fragment_generic_posts" >
+        <action
+            android:id="@+id/action_genericPostsFragment_to_descriptionFragment"
+            app:destination="@id/descriptionFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/descriptionFragment"
+        android:name="com.surajrathod.wpblog.fragments.DescriptionFragment"
+        android:label="DescriptionFragment" >
+        <argument
+            android:name="PostObject"
+            app:argType="com.surajrathod.wpblog.model.PostDetails" />
+    </fragment>
 </navigation>

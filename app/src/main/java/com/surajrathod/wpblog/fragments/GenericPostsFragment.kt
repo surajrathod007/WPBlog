@@ -6,8 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.surajrathod.wpblog.R
+import com.surajrathod.wpblog.adapters.RecyclerViewPostAdapter
 import com.surajrathod.wpblog.databinding.FragmentGenericPostsBinding
+import com.surajrathod.wpblog.model.PostDetails
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -36,15 +40,22 @@ class GenericPostsFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        val recyclerView = view.findViewById<View>(R.id.postList)
         val id = arguments?.getInt("typeOfPost")
         id.let {
 //            profile= myProfile.find { it.playerId==id }
             if(id!=null){
-                val genericTxt = view.findViewById<TextView>(R.id.genericPosts)
-                genericTxt.text="posts of category $id"
+//                val genericTxt = view.findViewById<TextView>(R.id.genericPosts)
+//                genericTxt.text="posts of category $id"
             }
 
         }
+       /* if (recyclerView is RecyclerView) {
+            with(recyclerView) {
+                layoutManager = LinearLayoutManager(context)
+                adapter = RecyclerViewPostAdapter(postList,2)
+            }
+        }*/
 
     }
 //    companion object {
