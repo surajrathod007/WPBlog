@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.navigation.NavArgs
 import androidx.navigation.fragment.navArgs
+import com.squareup.picasso.Picasso
 
 
 import com.surajrathod.wpblog.R
@@ -43,7 +44,15 @@ class DescriptionFragment : Fragment() {
             txtPostTitle.text = args.post.title
             txtPostDate.text = args.post.date
             postWebView.loadDataWithBaseURL("",args.post.content,"text/html","UTF-8","")
+
         }
+        val category = categoryList.find{ args.post.category == it.id}
+        if(category!=null)
+        {
+            binding.txtPostCategory.text = category.category
+        }
+        Picasso.get().load(args.post.img).into(binding.postImg)
+
 
 
         return view
