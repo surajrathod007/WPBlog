@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.core.text.trimmedLength
 import androidx.databinding.DataBindingUtil
@@ -27,12 +28,15 @@ import com.surajrathod.wpblog.model.PostCategory
 import com.surajrathod.wpblog.model.PostDetails
 
 
-val postList = arrayListOf<PostDetails>()
+val postList = mutableListOf<PostDetails>()
 val categoryList = arrayListOf<PostCategory>()
-lateinit var category0 : CardView
-lateinit var category1 : CardView
+
 class DashboardFragment : Fragment() {
 
+    lateinit var category0 : TextView
+    lateinit var category1 : TextView
+    lateinit var category2 : TextView
+    lateinit var category3 : TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,6 +61,11 @@ class DashboardFragment : Fragment() {
             val urlCategories = "https://surajtutz.000webhostapp.com/wp-json/wp/v2/categories"
             val requestForCategory = object : JsonArrayRequest(Request.Method.GET,urlCategories,null, Response.Listener {
                 println("Category API success $it")
+                category0=view.findViewById(R.id.txtCategory0)
+                category1=view.findViewById(R.id.txtCategory1)
+                category2=view.findViewById(R.id.txtCategory2)
+                category3=view.findViewById(R.id.txtCategory3)
+                val categories = arrayListOf<TextView>(category0, category1, category2, category3)
                 for (i in 0 until it.length()){
                     val jsonObject = it.getJSONObject(i)
                     val category = PostCategory(
@@ -64,7 +73,16 @@ class DashboardFragment : Fragment() {
                         jsonObject.getString("name")
                     )
                     categoryList.add(category)
+                    categories[i].text= categoryList[i].category
+                    categories[i].setOnClickListener {
+                        findNavController().navigate(
+                            DashboardFragmentDirections.actionDashboardFragmentToGenericPostsFragment(
+                                categoryList[i].id
+                            )
+                        )
+                    }
                 }
+
             },Response.ErrorListener {
 
             }){
@@ -75,28 +93,32 @@ class DashboardFragment : Fragment() {
                 object : JsonArrayRequest(Request.Method.GET, urlPosts, null, Response.Listener {
                     println("Post API success $it")
 
+                    if(postList.size!=it.length()) {
+                        for (i in 0 until it.length()) {
+                            val jsonObjectPostDetails = it.getJSONObject(i)
+                            val postDetails = PostDetails(
+                                jsonObjectPostDetails.getInt("id"),
+                                jsonObjectPostDetails.getJSONObject("title").getString("rendered"),
+                                jsonObjectPostDetails.getString("jetpack_featured_media_url"),
+                                jsonObjectPostDetails.getString("date").dropLast(9),
+                                jsonObjectPostDetails.getJSONArray("categories").getInt(0),
+                                jsonObjectPostDetails.getJSONObject("content")
+                                    .getString("rendered"),
+                                jsonObjectPostDetails.getString("link")
 
-                    for (i in 0 until it.length()) {
-                        val jsonObjectPostDetails = it.getJSONObject(i)
-                        val postDetails = PostDetails(
-                            jsonObjectPostDetails.getInt("id"),
-                            jsonObjectPostDetails.getJSONObject("title").getString("rendered"),
-                            jsonObjectPostDetails.getString("jetpack_featured_media_url"),
-                            jsonObjectPostDetails.getString("date").dropLast(9),
-                            jsonObjectPostDetails.getJSONArray("categories").getInt(0),
-                            jsonObjectPostDetails.getJSONObject("content").getString("rendered"),
-                            jsonObjectPostDetails.getString("link")
-
-                        )
-                        postList.add(postDetails)
-                    }
-
-                    if (recyclerView is RecyclerView) {
-                        with(recyclerView) {
-                            layoutManager = LinearLayoutManager(context)
-                            adapter = RecyclerViewPostAdapter(postList, 1)
+                            )
+                            postList.add(postDetails)
                         }
                     }
+
+                        if (recyclerView is RecyclerView) {
+                            with(recyclerView) {
+                                layoutManager = LinearLayoutManager(context)
+                                adapter = RecyclerViewPostAdapter(postList)
+                            }
+                        }
+
+
                 }, Response.ErrorListener {
                     println("API failed $it")
                 }) {
@@ -110,19 +132,6 @@ class DashboardFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-        category0=view.findViewById(R.id.category0)
-        category1=view.findViewById(R.id.category1)
-
-        category0.setOnClickListener {
-            val bundle = Bundle()
-            bundle.putInt("typeOfPost",0)
-            findNavController().navigate(R.id.action_dashboardFragment_to_genericPostsFragment,bundle)
-        }
-        category1.setOnClickListener {
-            val bundle = Bundle()
-            bundle.putInt("typeOfPost",1)
-            findNavController().navigate(R.id.action_dashboardFragment_to_genericPostsFragment,bundle)
-        }
     }
 
 
