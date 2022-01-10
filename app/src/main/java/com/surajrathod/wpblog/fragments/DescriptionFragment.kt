@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.navigation.NavArgs
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import com.squareup.picasso.Picasso
 import com.surajrathod.wpblog.Database.PostDatabase
@@ -25,7 +26,8 @@ import kotlinx.coroutines.launch
 class DescriptionFragment : Fragment() {
 
 
-    var isFav : Boolean = false
+
+
     lateinit var db: PostDatabase
     val args by navArgs<DescriptionFragmentArgs>()
     lateinit var binding: FragmentDescriptionBinding
@@ -60,16 +62,19 @@ class DescriptionFragment : Fragment() {
         Picasso.get().load(args.post.img).into(binding.postImg)
 
 
+        binding.backBtn.setOnClickListener {
+            Navigation.findNavController(it).navigate(DescriptionFragmentDirections.actionDescriptionFragmentToDashboardFragment())
+        }
+
         //Fav Button Checking
 
         GlobalScope.launch {
-
-             isFav = db.PostDao().isFav(args.post.id)
-        }
-
-        if(isFav){
-
-            binding.btnFavourite.setImageResource(R.drawable.ic_baseline_favorite_border_24)
+            val isFav = db.PostDao().isFav(args.post.id)
+            if (isFav) {
+                binding.btnFavourite.setImageResource(R.drawable.ic_baseline_favorite_24)
+            } else {
+                binding.btnFavourite.setImageResource(R.drawable.ic_baseline_favorite_border_24)
+            }
         }
 
 
@@ -77,24 +82,34 @@ class DescriptionFragment : Fragment() {
 
         binding.btnFavourite.setOnClickListener {
 
-
             GlobalScope.launch {
-                db.PostDao().insert(
 
-                    PostEntity(
-                        args.post.id,
-                        args.post.title,
-                        args.post.img,
-                        args.post.date,
-                        args.post.category,
-                        args.post.content,
-                        args.post.url
-                    )
-                )
+                var isFav = db.PostDao().isFav(args.post.id) //check the post is in database or not
+
+                if(isFav)
+                {
+                        db.PostDao().removeFav(args.post.id)
+                        //Toast.makeText(requireContext(),"Removed From Favourites",Toast.LENGTH_SHORT).show()
+                        binding.btnFavourite.setImageResource(R.drawable.ic_baseline_favorite_border_24)
+
+                }else{
+                        db.PostDao().insert(
+
+                            PostEntity(
+                                args.post.id,
+                                args.post.title,
+                                args.post.img,
+                                args.post.date,
+                                args.post.category,
+                                args.post.content,
+                                args.post.url
+                            )
+                        )
+                    binding.btnFavourite.setImageResource(R.drawable.ic_baseline_favorite_24)
+                    //Toast.makeText(requireContext(), "Added To Favourites", Toast.LENGTH_SHORT).show()
+                }
             }
 
-            binding.btnFavourite.setImageResource(R.drawable.ic_baseline_favorite_24)
-            Toast.makeText(requireContext(), "Added To Favourites", Toast.LENGTH_SHORT).show()
         }
 
 

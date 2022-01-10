@@ -26,4 +26,7 @@ interface PostDao {
 
     @Query("select exists(select * from PostTable where postId = :id)")
     fun isFav(id : Int): Boolean
+
+    @Query("delete from PostTable where postId = :id")
+    fun removeFav(id : Int)
 }
