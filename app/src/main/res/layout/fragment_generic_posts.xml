@@ -24,13 +24,25 @@
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/categoryToolbar"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/design_default_color_on_primary"
+                android:layout_height="?attr/actionBarSize"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_scrollFlags="scroll|enterAlways"
-                app:title="Category" />
+                android:background="@color/teal_700"
+                app:layout_collapseMode="pin"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                tools:visibility="visible"
+                app:title="Categories" />
+
 
         </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/categotyList"
+            android:scrollbars="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@color/teal_700"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/postList"

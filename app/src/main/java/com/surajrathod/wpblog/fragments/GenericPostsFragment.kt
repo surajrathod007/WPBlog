@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.surajrathod.wpblog.R
+import com.surajrathod.wpblog.adapters.CategoriesAdapter
 import com.surajrathod.wpblog.adapters.RecyclerViewPostAdapter
 import com.surajrathod.wpblog.databinding.FragmentGenericPostsBinding
 import com.surajrathod.wpblog.model.PostDetails
@@ -32,6 +33,15 @@ class GenericPostsFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        val binding : FragmentGenericPostsBinding
+        binding= FragmentGenericPostsBinding.bind(view)
+        binding.apply {
+            with(binding){
+                categotyList.adapter=CategoriesAdapter(categoryList)
+                categotyList.layoutManager=LinearLayoutManager(context)
+            }
+
+        }
         val recyclerView = view.findViewById<View>(R.id.postList)
         arguments?.let{
             val args = GenericPostsFragmentArgs.fromBundle(it)
