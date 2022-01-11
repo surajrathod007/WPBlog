@@ -48,11 +48,39 @@ class DescriptionFragment : Fragment() {
 
         db = PostDatabase.getDatabase(requireContext())
 
+
+        //html content formating
+
+        val content = args.post.content
+        val pish =
+            "<html>\n" +
+                    "<head>\n" +
+                    "<title>Page Title</title>\n" +
+                    "<style>\n" +
+                    "body {\n" +
+                    "  background-color: #ffffff;\n" +
+                    "  text-align: left;\n" +
+                    "  color: #2b2839;\n" +
+                    "  font-family: 'Oswald', sans-serif;\n" +
+                    "}\n" +
+
+                    "a { color : green;}" +
+                    "</style>\n" +
+                    "\n" +
+                    "<link rel=\"preconnect\" href=\"https://fonts.googleapis.com\">\n" +
+                    "<link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin>\n" +
+                    "<link href=\"https://fonts.googleapis.com/css2?family=Oswald:wght@300&display=swap\" rel=\"stylesheet\">\n" +
+                    "</head>\n" +
+                    "<body>"
+        val pas = "</body></html>"
+        val myHtmlString = pish + content + pas
+
+        //apply data to views
         binding.apply {
 
             txtPostTitle.text = args.post.title
             txtPostDate.text = args.post.date
-            postWebView.loadDataWithBaseURL("", args.post.content, "text/html", "UTF-8", "")
+            postWebView.loadDataWithBaseURL("", myHtmlString, "text/html", "UTF-8", "")
 
         }
         val category = categoryList.find { args.post.category == it.id }
