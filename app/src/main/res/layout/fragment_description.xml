@@ -46,7 +46,7 @@
                     <ImageView
                         android:id="@+id/postImg"
                         android:layout_width="match_parent"
-                        android:layout_height="270dp"
+                        android:layout_height="230dp"
                         android:fitsSystemWindows="true"
                         android:scaleType="centerCrop"
 
@@ -154,6 +154,7 @@
                         android:drawableStart="@drawable/ic_baseline_date_range_24"
                         android:text="20-Dec-2020"
                         android:id="@+id/txtPostDate"
+                        android:textStyle="italic"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
 

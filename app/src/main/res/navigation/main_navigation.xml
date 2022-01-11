@@ -47,5 +47,13 @@
     <fragment
         android:id="@+id/savedPostFragment"
         android:name="com.surajrathod.wpblog.fragments.SavedPostFragment"
-        android:label="SavedPostFragment" />
+        android:label="SavedPostFragment" >
+
+        <action
+            android:id="@+id/action_savedPostFragment_to_descriptionFragment"
+            app:destination="@id/descriptionFragment" />
+        <action
+            android:id="@+id/action_savedPostFragment_to_dashboardFragment"
+            app:destination="@id/dashboardFragment" />
+    </fragment>
 </navigation>
