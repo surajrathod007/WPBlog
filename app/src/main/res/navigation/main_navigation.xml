@@ -16,23 +16,21 @@
         <action
             android:id="@+id/action_dashboardFragment_to_descriptionFragment"
             app:destination="@id/descriptionFragment" />
+        <action
+            android:id="@+id/action_dashboardFragment_to_savedPostFragment"
+            app:destination="@id/savedPostFragment" />
     </fragment>
     <fragment
         android:id="@+id/genericPostsFragment"
         android:name="com.surajrathod.wpblog.fragments.GenericPostsFragment"
         android:label="fragment_generic_posts"
         tools:layout="@layout/fragment_generic_posts" >
-        <action
-            android:id="@+id/action_genericPostsFragment_to_descriptionFragment"
-            app:destination="@id/descriptionFragment"
-            app:popUpTo="@id/main_navigation" />
         <argument
             android:name="postCategory"
             app:argType="integer" />
         <action
-            android:id="@+id/action_genericPostsFragment_to_dashboardFragment"
-            app:destination="@id/dashboardFragment"
-            app:popUpTo="@id/main_navigation" />
+            android:id="@+id/action_genericPostsFragment_to_descriptionFragment"
+            app:destination="@id/descriptionFragment" />
     </fragment>
     <fragment
         android:id="@+id/descriptionFragment"
@@ -41,9 +39,9 @@
         <argument
             android:name="post"
             app:argType="com.surajrathod.wpblog.model.PostDetails" />
-        <action
-            android:id="@+id/action_descriptionFragment_to_dashboardFragment"
-            app:destination="@id/dashboardFragment"
-            app:popUpTo="@id/main_navigation" />
     </fragment>
+    <fragment
+        android:id="@+id/savedPostFragment"
+        android:name="com.surajrathod.wpblog.fragments.SavedPostFragment"
+        android:label="SavedPostFragment" />
 </navigation>

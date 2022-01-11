@@ -10,10 +10,11 @@ import com.squareup.picasso.Picasso
 import com.surajrathod.wpblog.R
 import com.surajrathod.wpblog.databinding.PostViewHolderBinding
 import com.surajrathod.wpblog.fragments.DashboardFragmentDirections
+import com.surajrathod.wpblog.fragments.GenericPostsFragmentDirections
 import com.surajrathod.wpblog.fragments.categoryList
 import com.surajrathod.wpblog.model.PostDetails
 
-class RecyclerViewPostAdapter (val postList : List<PostDetails>) : RecyclerView.Adapter<RecyclerViewPostAdapter.ViewHolder>(){
+class RecyclerViewPostAdapter (val postList : List<PostDetails>,val type : Int) : RecyclerView.Adapter<RecyclerViewPostAdapter.ViewHolder>(){
 
     lateinit var view : View
     private var PostList = arrayListOf<PostDetails>()
@@ -41,7 +42,10 @@ class RecyclerViewPostAdapter (val postList : List<PostDetails>) : RecyclerView.
             holder.binding.category.text=category.category
         }
         holder.binding.postItem.setOnClickListener{
+            if(type==0)
             Navigation.findNavController(it).navigate(DashboardFragmentDirections.actionDashboardFragmentToDescriptionFragment(post))
+            else
+                Navigation.findNavController(it).navigate(GenericPostsFragmentDirections.actionGenericPostsFragmentToDescriptionFragment(post))
         }
     }
 

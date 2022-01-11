@@ -53,12 +53,13 @@ class DashboardFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view =inflater.inflate(R.layout.fragment_dashboard, container, false)
-        category0=view.findViewById(R.id.txtCategory0)
+//        category0=view.findViewById(R.id.txtCategory0)
         category1=view.findViewById(R.id.txtCategory1)
         category2=view.findViewById(R.id.txtCategory2)
         category3=view.findViewById(R.id.txtCategory3)
-        val categories = arrayListOf<TextView>(category0, category1, category2, category3)
+
         val binding = FragmentDashboardBinding.bind(view)
+        val categories = arrayListOf<TextView>(binding.txtCategory0, category1, category2, category3)
         val recyclerView = view.findViewById<View>(R.id.postList)
 
         if(InternetStatus().checkForInternet(activity as Context) && !dataLoaded) {
@@ -105,16 +106,10 @@ class DashboardFragment : Fragment() {
                             )
                             postList.add(postDetails)
                         }
-
                     binding.loadingCover.visibility=RelativeLayout.GONE
-                    /*if (recyclerView is RecyclerView) {
-                        with(recyclerView) {
-                            layoutManager = LinearLayoutManager(context)
-                            adapter = RecyclerViewPostAdapter(postList)
-                        }
-                    }*/
                     dataLoader(recyclerView as RecyclerView,categories)
                     dataLoaded=true
+
                 }, Response.ErrorListener {
                     println("API failed $it")
                 }) {
@@ -128,6 +123,9 @@ class DashboardFragment : Fragment() {
 
         }else{
             binding.offlineCover.visibility=RelativeLayout.VISIBLE
+            binding.btnGoOffline.setOnClickListener{
+                findNavController().navigate(DashboardFragmentDirections.actionDashboardFragmentToSavedPostFragment())
+            }
         }
         return view
     }
@@ -150,7 +148,7 @@ class DashboardFragment : Fragment() {
          }
              with(recyclerView) {
                  layoutManager = LinearLayoutManager(context)
-                 adapter = RecyclerViewPostAdapter(postList)
+                 adapter = RecyclerViewPostAdapter(postList,0)
              }
      }
 
