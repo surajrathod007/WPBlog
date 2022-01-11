@@ -38,7 +38,7 @@ class GenericPostsFragment : Fragment() {
             if (recyclerView is RecyclerView) {
                 with(recyclerView) {
                     layoutManager = LinearLayoutManager(context)
-                    adapter = RecyclerViewPostAdapter(postList.filter { it.category == args.postCategory })
+                    adapter = RecyclerViewPostAdapter(postList.filter { it.category == args.postCategory },1)
                 }
             }
         }

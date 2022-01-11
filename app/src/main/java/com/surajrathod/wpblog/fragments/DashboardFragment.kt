@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.core.text.trimmedLength
@@ -30,6 +31,7 @@ import com.surajrathod.wpblog.model.PostDetails
 
 val postList = mutableListOf<PostDetails>()
 val categoryList = arrayListOf<PostCategory>()
+var dataLoaded = false
 
 class DashboardFragment : Fragment() {
 
@@ -51,21 +53,23 @@ class DashboardFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view =inflater.inflate(R.layout.fragment_dashboard, container, false)
+//        category0=view.findViewById(R.id.txtCategory0)
+        category1=view.findViewById(R.id.txtCategory1)
+        category2=view.findViewById(R.id.txtCategory2)
+        category3=view.findViewById(R.id.txtCategory3)
 
         val binding = FragmentDashboardBinding.bind(view)
+        val categories = arrayListOf<TextView>(binding.txtCategory0, category1, category2, category3)
         val recyclerView = view.findViewById<View>(R.id.postList)
-        if(InternetStatus().checkForInternet(activity as Context)) {
+
+        if(InternetStatus().checkForInternet(activity as Context) && !dataLoaded) {
             val queuePosts = Volley.newRequestQueue(activity as Context)
             val queueCategories = Volley.newRequestQueue(activity as Context)
             val urlPosts = "https://surajtutz.000webhostapp.com/wp-json/wp/v2/posts"
             val urlCategories = "https://surajtutz.000webhostapp.com/wp-json/wp/v2/categories"
             val requestForCategory = object : JsonArrayRequest(Request.Method.GET,urlCategories,null, Response.Listener {
                 println("Category API success $it")
-                category0=view.findViewById(R.id.txtCategory0)
-                category1=view.findViewById(R.id.txtCategory1)
-                category2=view.findViewById(R.id.txtCategory2)
-                category3=view.findViewById(R.id.txtCategory3)
-                val categories = arrayListOf<TextView>(category0, category1, category2, category3)
+
                 for (i in 0 until it.length()){
                     val jsonObject = it.getJSONObject(i)
                     val category = PostCategory(
@@ -73,15 +77,8 @@ class DashboardFragment : Fragment() {
                         jsonObject.getString("name")
                     )
                     categoryList.add(category)
-                    categories[i].text= categoryList[i].category
-                    categories[i].setOnClickListener {
-                        findNavController().navigate(
-                            DashboardFragmentDirections.actionDashboardFragmentToGenericPostsFragment(
-                                categoryList[i].id
-                            )
-                        )
-                    }
                 }
+
 
             },Response.ErrorListener {
 
@@ -93,7 +90,7 @@ class DashboardFragment : Fragment() {
                 object : JsonArrayRequest(Request.Method.GET, urlPosts, null, Response.Listener {
                     println("Post API success $it")
 
-                    if(postList.size!=it.length()) {
+                    /*if(postList.size!=it.length()) {*/
                         for (i in 0 until it.length()) {
                             val jsonObjectPostDetails = it.getJSONObject(i)
                             val postDetails = PostDetails(
@@ -109,15 +106,9 @@ class DashboardFragment : Fragment() {
                             )
                             postList.add(postDetails)
                         }
-                    }
-
-                        if (recyclerView is RecyclerView) {
-                            with(recyclerView) {
-                                layoutManager = LinearLayoutManager(context)
-                                adapter = RecyclerViewPostAdapter(postList)
-                            }
-                        }
-
+                    binding.loadingCover.visibility=RelativeLayout.GONE
+                    dataLoader(recyclerView as RecyclerView,categories)
+                    dataLoaded=true
 
                 }, Response.ErrorListener {
                     println("API failed $it")
@@ -125,6 +116,16 @@ class DashboardFragment : Fragment() {
 
                 }
             queuePosts.add(requestForPosts)
+
+        }else if(dataLoaded){
+            binding.loadingCover.visibility=RelativeLayout.GONE
+            dataLoader(recyclerView as RecyclerView,categories)
+
+        }else{
+            binding.offlineCover.visibility=RelativeLayout.VISIBLE
+            binding.btnGoOffline.setOnClickListener{
+                findNavController().navigate(DashboardFragmentDirections.actionDashboardFragmentToSavedPostFragment())
+            }
         }
         return view
     }
@@ -133,6 +134,23 @@ class DashboardFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
     }
+
+     fun dataLoader(recyclerView: RecyclerView,categories : List<TextView>){
+         for (i in 0 until categoryList.size){
+             categories[i].text= categoryList[i].category
+             categories[i].setOnClickListener {
+                 findNavController().navigate(
+                     DashboardFragmentDirections.actionDashboardFragmentToGenericPostsFragment(
+                         categoryList[i].id
+                     )
+                 )
+             }
+         }
+             with(recyclerView) {
+                 layoutManager = LinearLayoutManager(context)
+                 adapter = RecyclerViewPostAdapter(postList,0)
+             }
+     }
 
 
 }
