@@ -5,10 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 import com.surajrathod.wpblog.Database.PostEntity
 import com.surajrathod.wpblog.R
 import com.surajrathod.wpblog.adapters.FavouritesPostAdapter.ViewHolder
 import com.surajrathod.wpblog.databinding.PostViewHolderBinding
+import com.surajrathod.wpblog.fragments.categoryList
 
 class FavouritesPostAdapter(var context : Context) : RecyclerView.Adapter<FavouritesPostAdapter.ViewHolder>(){
 
@@ -41,6 +43,13 @@ class FavouritesPostAdapter(var context : Context) : RecyclerView.Adapter<Favour
 
         holder.binding.title.text = data.postTitle
         //holder.binding.category.text = data.postCategory
+        holder.binding.date.text = data.postDate
+        Picasso.get().load(data.postImg).into(holder.binding.poster)
+
+        val category = categoryList.find { data.postCategory == it.id }
+        if (category != null) {
+            holder.binding.category.text=category.category
+        }
         holder.binding.date.text = data.postDate
 
 
