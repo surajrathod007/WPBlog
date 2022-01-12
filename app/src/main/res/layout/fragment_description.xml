@@ -124,12 +124,13 @@
                     android:layout_height="match_parent">
 
                     <TextView
+                        android:fontFamily="@font/google_sans_bold"
                         android:id="@+id/txtPostTitle"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
 
-                        android:textStyle="bold"
+
                         android:textColor="#ff102b3c"
                         android:textSize="25sp"
                         android:text="Best Kotlin Tips And Tricks , How to achive this"
@@ -137,6 +138,8 @@
                         android:layout_height="wrap_content"/>
 
                     <TextView
+                        android:clickable="true"
+
                         app:layout_constraintTop_toBottomOf="@+id/txtPostTitle"
                         app:layout_constraintLeft_toLeftOf="parent"
                         android:background="@drawable/category_bg"
@@ -144,12 +147,14 @@
                         android:paddingBottom="2dp"
                         android:paddingEnd="5dp"
                         android:text="Programming"
+                        android:fontFamily="@font/google_sans_medium"
 
                         android:id="@+id/txtPostCategory"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
 
                     <TextView
+                        android:fontFamily="@font/google_sans_regular"
                         app:layout_constraintLeft_toRightOf="@+id/txtPostCategory"
                         app:layout_constraintTop_toBottomOf="@+id/txtPostTitle"
                         android:textSize="15sp"
@@ -157,7 +162,7 @@
                         android:drawableStart="@drawable/ic_baseline_date_range_24"
                         android:text="20-Dec-2020"
                         android:id="@+id/txtPostDate"
-                        android:textStyle="italic"
+
                         android:textColor="#ff3f5563"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>

@@ -50,26 +50,42 @@ class DescriptionFragment : Fragment() {
         //html content formating
 
         val content = args.post.content
-        val pish =
-            "<html>\n" +
-                    "<head>\n" +
-                    "<title>Page Title</title>\n" +
-                    "<style>\n" +
-                    "body {\n" +
-                    "  background-color: #ffffff;\n" +
-                    "  text-align: left;\n" +
-                    "  color: #2b2839;\n" +
-                    "  font-family: 'Oswald', sans-serif;\n" +
-                    "}\n" +
-
-                    "a { color : green;}" +
-                    "</style>\n" +
-                    "\n" +
-                    "<link rel=\"preconnect\" href=\"https://fonts.googleapis.com\">\n" +
-                    "<link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin>\n" +
-                    "<link href=\"https://fonts.googleapis.com/css2?family=Oswald:wght@300&display=swap\" rel=\"stylesheet\">\n" +
-                    "</head>\n" +
-                    "<body>"
+        val pish = "<html>\n" +
+                "<head>\n" +
+                "\n" +
+                "<style>\n" +
+                "\n" +
+                "body{\n" +
+                "font-family: 'Open Sans', sans-serif;\n" +
+                "color : #2b2839;\n" +
+                "}\n" +
+                "\n" +
+                "</style>\n" +
+                "<link rel=\"preconnect\" href=\"https://fonts.googleapis.com\">\n" +
+                "<link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin>\n" +
+                "<link href=\"https://fonts.googleapis.com/css2?family=Open+Sans&display=swap\" rel=\"stylesheet\">\n" +
+                "\n" +
+                "</head>\n" +
+                "<body>"
+//            "<html>\n" +
+//                    "<head>\n" +
+//                    "<title>Page Title</title>\n" +
+//                    "<style>\n" +
+//                    "body {\n" +
+//                    "  background-color: #ffffff;\n" +
+//                    "  text-align: left;\n" +
+//                    "  color: #2b2839;\n" +
+//                    "  font-family: 'Oswald', sans-serif;\n" +
+//                    "}\n" +
+//
+//                    "a { color : green;}" +
+//                    "</style>\n" +
+//                    "\n" +
+//                    "<link rel=\"preconnect\" href=\"https://fonts.googleapis.com\">\n" +
+//                    "<link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin>\n" +
+//                    "<link href=\"https://fonts.googleapis.com/css2?family=Oswald:wght@300&display=swap\" rel=\"stylesheet\">\n" +
+//                    "</head>\n" +
+//                    "<body>"
         val pas = "</body></html>"
         val myHtmlString = pish + content + pas
 
