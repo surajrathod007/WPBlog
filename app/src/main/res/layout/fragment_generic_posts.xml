@@ -9,6 +9,7 @@
     </data>
 
     <LinearLayout
+        android:background="@color/Default_BG"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -26,10 +27,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:layout_constraintTop_toTopOf="parent"
-                android:background="@color/teal_700"
+                android:background="@color/white"
                 app:layout_collapseMode="pin"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
                 tools:visibility="visible"
+                app:titleTextColor="@color/Dark_slate_gray"
                 app:title="Categories" />
 
 

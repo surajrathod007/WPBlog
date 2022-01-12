@@ -8,6 +8,7 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:background="@color/Default_BG"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".fragments.SavedPostFragment">
@@ -27,7 +28,7 @@
 
                 <com.google.android.material.appbar.MaterialToolbar
                     app:layout_scrollFlags="enterAlways|scroll"
-                    android:background="#E1F5FE"
+                    android:background="@color/white"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize">
 
@@ -41,7 +42,9 @@
                        android:layout_height="30dp"/>
 
                     <TextView
+                        android:textStyle="bold"
                         android:text="Favourites Posts"
+                        android:textColor="@color/Dark_slate_gray"
                         android:textSize="20sp"
                         android:layout_gravity="center_horizontal"
                         android:layout_width="wrap_content"

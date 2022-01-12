@@ -9,6 +9,7 @@
     </data>
 
     <LinearLayout
+        android:background="#FFEFF3F6"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -125,16 +126,19 @@
                 android:background="@color/design_default_color_on_primary"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_scrollFlags="scroll|enterAlways"
-                app:title="Dashboard" />
+                app:title="Dashboard"
+                app:titleTextColor="@color/Dark_slate_gray"/>
 
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.recyclerview.widget.RecyclerView
+
+
+            android:layout_marginTop="5dp"
             android:id="@+id/categotyList"
-            android:scrollbars="horizontal"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:background="@color/Gainsboro"
+            android:background="@color/Default_BG"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             />
 
