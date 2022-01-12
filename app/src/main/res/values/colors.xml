@@ -7,4 +7,15 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    
+    // Custom color schemes
+    <color name="Gainsboro">#e0f0e5</color>
+    <color name="Thistle">#cfc9f7</color>
+    <color name="Antique_white">#f4e6db</color>
+    <color name="Dark_slate_blue">#4a4e74</color>
+    <color name="Lemon_chiffon">#fffad2</color>
+    <color name="Dark_slate_gray">#2b2839</color>
+    
+
+
 </resources>

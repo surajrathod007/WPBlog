@@ -1,6 +1,5 @@
 package com.surajrathod.wpblog.adapters
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +10,7 @@ import com.surajrathod.wpblog.R
 import com.surajrathod.wpblog.databinding.PostViewHolderBinding
 import com.surajrathod.wpblog.fragments.DashboardFragmentDirections
 import com.surajrathod.wpblog.fragments.GenericPostsFragmentDirections
-import com.surajrathod.wpblog.fragments.categoryList
+import com.surajrathod.wpblog.fragments.fetchedCategoryList
 import com.surajrathod.wpblog.model.PostDetails
 
 class RecyclerViewPostAdapter (val postList : List<PostDetails>,val type : Int) : RecyclerView.Adapter<RecyclerViewPostAdapter.ViewHolder>(){
@@ -37,7 +36,7 @@ class RecyclerViewPostAdapter (val postList : List<PostDetails>,val type : Int) 
         holder.binding.title.text=post.title
         Picasso.get().load(post.img).into(holder.binding.poster)
         holder.binding.date.text=post.date
-        val category = categoryList.find { post.category == it.id }
+        val category = fetchedCategoryList.find { post.category == it.id }
         if (category != null) {
             holder.binding.category.text=category.category
         }

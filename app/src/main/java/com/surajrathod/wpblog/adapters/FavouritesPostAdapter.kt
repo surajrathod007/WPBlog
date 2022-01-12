@@ -9,10 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import com.surajrathod.wpblog.Database.PostEntity
 import com.surajrathod.wpblog.R
-import com.surajrathod.wpblog.adapters.FavouritesPostAdapter.ViewHolder
 import com.surajrathod.wpblog.databinding.PostViewHolderBinding
 import com.surajrathod.wpblog.fragments.SavedPostFragmentDirections
-import com.surajrathod.wpblog.fragments.categoryList
+import com.surajrathod.wpblog.fragments.fetchedCategoryList
 import com.surajrathod.wpblog.model.PostDetails
 
 class FavouritesPostAdapter(var context: Context) :
@@ -49,7 +48,7 @@ class FavouritesPostAdapter(var context: Context) :
         holder.binding.date.text = data.postDate
         Picasso.get().load(data.postImg).into(holder.binding.poster)
 
-        val category = categoryList.find { data.postCategory == it.id }
+        val category = fetchedCategoryList.find { data.postCategory == it.id }
         if (category != null) {
             holder.binding.category.text = category.category
         }

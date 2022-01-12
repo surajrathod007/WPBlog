@@ -36,15 +36,6 @@
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/categotyList"
-            android:scrollbars="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:background="@color/teal_700"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            />
-
-        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/postList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

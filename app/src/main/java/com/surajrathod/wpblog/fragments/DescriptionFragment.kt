@@ -8,8 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
-import androidx.navigation.NavArgs
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import com.squareup.picasso.Picasso
@@ -83,7 +81,7 @@ class DescriptionFragment : Fragment() {
             postWebView.loadDataWithBaseURL("", myHtmlString, "text/html", "UTF-8", "")
 
         }
-        val category = categoryList.find { args.post.category == it.id }
+        val category = fetchedCategoryList.find { args.post.category == it.id }
         if (category != null) {
             binding.txtPostCategory.text = category.category
         }

@@ -5,15 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout.HORIZONTAL
-import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.surajrathod.wpblog.R
-import com.surajrathod.wpblog.adapters.CategoriesAdapter
 import com.surajrathod.wpblog.adapters.RecyclerViewPostAdapter
-import com.surajrathod.wpblog.databinding.FragmentGenericPostsBinding
-import com.surajrathod.wpblog.model.PostDetails
 
 
 class GenericPostsFragment : Fragment() {
@@ -34,22 +29,14 @@ class GenericPostsFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val binding : FragmentGenericPostsBinding
-        binding= FragmentGenericPostsBinding.bind(view)
-        binding.apply {
-            with(binding){
-                categotyList.adapter=CategoriesAdapter(categoryList)
-                categotyList.layoutManager=LinearLayoutManager(context,0,false)
-            }
 
-        }
         val recyclerView = view.findViewById<View>(R.id.postList)
         arguments?.let{
             val args = GenericPostsFragmentArgs.fromBundle(it)
             if (recyclerView is RecyclerView) {
                 with(recyclerView) {
                     layoutManager = LinearLayoutManager(context)
-                    adapter = RecyclerViewPostAdapter(postList.filter { it.category == args.postCategory },1)
+                    adapter = RecyclerViewPostAdapter(fetchedPostList.filter { it.category == args.postCategory },1)
                 }
             }
         }

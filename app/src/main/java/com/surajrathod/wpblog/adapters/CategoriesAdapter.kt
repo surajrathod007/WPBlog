@@ -4,15 +4,14 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
-import com.surajrathod.wpblog.Database.PostEntity
 import com.surajrathod.wpblog.databinding.CategoryViewholderBinding
-import com.surajrathod.wpblog.fragments.GenericPostsFragmentDirections
-import com.surajrathod.wpblog.fragments.postList
+import com.surajrathod.wpblog.fragments.DashboardFragmentDirections
+import com.surajrathod.wpblog.fragments.fetchedPostList
 import com.surajrathod.wpblog.model.PostCategory
 import com.surajrathod.wpblog.model.PostDetails
 
 class CategoriesAdapter(val categoryList : List<PostCategory>) : RecyclerView.Adapter<CategoriesAdapter.ViewHolder>() {
-   var datalist = postList as List<PostDetails>
+   var datalist = fetchedPostList as List<PostDetails>
     class ViewHolder(val binding : CategoryViewholderBinding) : RecyclerView.ViewHolder(binding.root) {
 
     }
@@ -25,9 +24,7 @@ class CategoriesAdapter(val categoryList : List<PostCategory>) : RecyclerView.Ad
         val categoty = categoryList[position]
         holder.binding.categoryName.text=categoty.category
         holder.binding.categoryName.setOnClickListener {
-           /* datalist = postList.filter { categoty.id == it.id }
-            RecyclerViewPostAdapter(datalist,1).update()*/
-            Navigation.findNavController(it).navigate(GenericPostsFragmentDirections.actionGenericPostsFragmentSelf2(categoty.id))
+            Navigation.findNavController(it).navigate(DashboardFragmentDirections.actionDashboardFragmentToGenericPostsFragment(categoty.id))
         }
     }
 
