@@ -31,6 +31,9 @@
         <action
             android:id="@+id/action_genericPostsFragment_to_descriptionFragment"
             app:destination="@id/descriptionFragment" />
+        <action
+            android:id="@+id/action_genericPostsFragment_self2"
+            app:destination="@id/genericPostsFragment" />
     </fragment>
     <fragment
         android:id="@+id/descriptionFragment"

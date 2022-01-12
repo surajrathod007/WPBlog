@@ -30,7 +30,7 @@ import com.surajrathod.wpblog.model.PostDetails
 
 
 val postList = mutableListOf<PostDetails>()
-val categoryList = arrayListOf<PostCategory>()
+val categoryList = mutableListOf<PostCategory>()
 var dataLoaded = false
 
 class DashboardFragment : Fragment() {

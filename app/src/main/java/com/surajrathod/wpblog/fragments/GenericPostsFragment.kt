@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout.HORIZONTAL
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -38,7 +39,7 @@ class GenericPostsFragment : Fragment() {
         binding.apply {
             with(binding){
                 categotyList.adapter=CategoriesAdapter(categoryList)
-                categotyList.layoutManager=LinearLayoutManager(context)
+                categotyList.layoutManager=LinearLayoutManager(context,0,false)
             }
 
         }

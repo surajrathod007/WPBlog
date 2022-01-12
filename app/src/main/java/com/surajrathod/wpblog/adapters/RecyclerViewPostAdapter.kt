@@ -50,4 +50,8 @@ class RecyclerViewPostAdapter (val postList : List<PostDetails>,val type : Int) 
     }
 
     inner class ViewHolder(val binding : PostViewHolderBinding) : RecyclerView.ViewHolder(binding.root)
+
+    fun update(){
+        notifyDataSetChanged()
+    }
 }

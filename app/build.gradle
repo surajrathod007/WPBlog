@@ -60,6 +60,8 @@ dependencies {
     //picasso for Img fetching
     implementation 'com.squareup.picasso:picasso:2.71828'
 
+    //Recycler view dependency
+    implementation "androidx.recyclerview:recyclerview:1.2.1"
 
 
     //material Components
