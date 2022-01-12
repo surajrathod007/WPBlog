@@ -42,9 +42,21 @@
         <argument
             android:name="post"
             app:argType="com.surajrathod.wpblog.model.PostDetails" />
+        <action
+            android:id="@+id/action_descriptionFragment_to_dashboardFragment"
+            app:destination="@id/dashboardFragment"
+            app:popUpTo="@id/main_navigation" />
     </fragment>
     <fragment
         android:id="@+id/savedPostFragment"
         android:name="com.surajrathod.wpblog.fragments.SavedPostFragment"
-        android:label="SavedPostFragment" />
+        android:label="SavedPostFragment" >
+
+        <action
+            android:id="@+id/action_savedPostFragment_to_descriptionFragment"
+            app:destination="@id/descriptionFragment" />
+        <action
+            android:id="@+id/action_savedPostFragment_to_dashboardFragment"
+            app:destination="@id/dashboardFragment" />
+    </fragment>
 </navigation>
