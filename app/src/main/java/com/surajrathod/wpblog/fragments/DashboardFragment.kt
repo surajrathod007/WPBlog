@@ -1,11 +1,15 @@
 package com.surajrathod.wpblog.fragments
 
+import android.animation.ObjectAnimator
+import android.animation.ValueAnimator
 import android.content.Context
 import android.os.Bundle
+import android.os.Handler
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AbsSeekBar
 import android.widget.RelativeLayout
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -24,11 +28,13 @@ import com.surajrathod.wpblog.model.PostDetails
 
 val fetchedPostList = mutableListOf<PostDetails>()
 val fetchedCategoryList = mutableListOf<PostCategory>()
-var dataLoaded = false
+
 
 class DashboardFragment : Fragment() {
 
     lateinit var binding: FragmentDashboardBinding
+    var dataLoaded = false
+    var progress = 100
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -60,6 +66,8 @@ class DashboardFragment : Fragment() {
                     )
                     fetchedCategoryList.add(category)
                 }
+                progress=800
+                binding.loadingBar.progress = progress
 
             },Response.ErrorListener {
 
@@ -87,9 +95,14 @@ class DashboardFragment : Fragment() {
                             )
                             fetchedPostList.add(postDetails)
                         }
-                    binding.loadingCover.visibility=RelativeLayout.GONE
+                     progress = 1000
+                    binding.loadingBar.progress = progress
                     dataLoader()
                     dataLoaded=true
+                   val handler = Handler()
+                    handler.postDelayed(Runnable {
+                        binding.loadingCover.visibility=RelativeLayout.GONE
+                    },2500)
 
                 }, Response.ErrorListener {
                     println("API failed $it")
@@ -107,6 +120,7 @@ class DashboardFragment : Fragment() {
                 findNavController().navigate(DashboardFragmentDirections.actionDashboardFragmentToSavedPostFragment())
             }
         }
+
         return view
     }
 
@@ -117,8 +131,10 @@ class DashboardFragment : Fragment() {
                  postList.adapter = RecyclerViewPostAdapter(fetchedPostList,0)
                  categotyList.adapter= CategoriesAdapter(fetchedCategoryList)
                  categotyList.layoutManager= LinearLayoutManager(context,0,false)
+
              }
          }
+
      }
 
 }
