@@ -50,7 +50,11 @@ class DashboardFragment : Fragment() {
         val view =inflater.inflate(R.layout.fragment_dashboard, container, false)
         binding= FragmentDashboardBinding.bind(view)
 
+//    binding.loadingCover.visibility=RelativeLayout.GONE // remove from comments while testing api etc
+
         if(InternetStatus().checkForInternet(activity as Context) && !dataLoaded) {
+            fetchedCategoryList.clear()
+            fetchedPostList.clear()
             val queuePosts = Volley.newRequestQueue(activity as Context)
             val queueCategories = Volley.newRequestQueue(activity as Context)
             val urlPosts = "https://surajtutz.000webhostapp.com/wp-json/wp/v2/posts"
@@ -97,8 +101,8 @@ class DashboardFragment : Fragment() {
                         }
                      progress = 1000
                     binding.loadingBar.progress = progress
-                    dataLoader()
                     dataLoaded=true
+                    dataLoader()
                    val handler = Handler()
                     handler.postDelayed(Runnable {
                         binding.loadingCover.visibility=RelativeLayout.GONE
@@ -114,8 +118,11 @@ class DashboardFragment : Fragment() {
         }else if(dataLoaded){
             binding.loadingCover.visibility=RelativeLayout.GONE
             dataLoader()
+//            fetchedPostList.add(PostDetails(110,"dummy","img","12456",225,"ahgdsdha","uaold"))
+//            RecyclerViewPostAdapter(fetchedPostList,0).update()
         }else{
             binding.offlineCover.visibility=RelativeLayout.VISIBLE
+//             dataLoader()
             binding.btnGoOffline.setOnClickListener{
                 findNavController().navigate(DashboardFragmentDirections.actionDashboardFragmentToSavedPostFragment())
             }
@@ -125,16 +132,17 @@ class DashboardFragment : Fragment() {
     }
 
      fun dataLoader(){
-         binding.apply {
-             with(binding){
-                 postList.layoutManager = LinearLayoutManager(context)
-                 postList.adapter = RecyclerViewPostAdapter(fetchedPostList,0)
-                 categotyList.adapter= CategoriesAdapter(fetchedCategoryList)
-                 categotyList.layoutManager= LinearLayoutManager(context,0,false)
-
+println("data loading")
+             binding.apply {
+                 with(binding) {
+                     postList.layoutManager = LinearLayoutManager(context)
+                     postList.adapter = RecyclerViewPostAdapter(fetchedPostList, 0)
+                     categotyList.adapter = CategoriesAdapter(fetchedCategoryList)
+                     categotyList.layoutManager = LinearLayoutManager(context, 0, false)
+                 }
              }
-         }
-
+         println("data loading done")
      }
+
 
 }

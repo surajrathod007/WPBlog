@@ -13,10 +13,9 @@ import com.surajrathod.wpblog.fragments.GenericPostsFragmentDirections
 import com.surajrathod.wpblog.fragments.fetchedCategoryList
 import com.surajrathod.wpblog.model.PostDetails
 
-class RecyclerViewPostAdapter (val postList : List<PostDetails>,val type : Int) : RecyclerView.Adapter<RecyclerViewPostAdapter.ViewHolder>(){
+class RecyclerViewPostAdapter (val postList : MutableList<PostDetails>,val type : Int) : RecyclerView.Adapter<RecyclerViewPostAdapter.ViewHolder>(){
 
     lateinit var view : View
-    private var PostList = arrayListOf<PostDetails>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
         view =LayoutInflater.from(parent.context).inflate(R.layout.post_view_holder,parent,false)
@@ -50,7 +49,7 @@ class RecyclerViewPostAdapter (val postList : List<PostDetails>,val type : Int) 
 
     inner class ViewHolder(val binding : PostViewHolderBinding) : RecyclerView.ViewHolder(binding.root)
 
-    fun update(){
+    /*fun update(){
         notifyDataSetChanged()
-    }
+    }*/
 }

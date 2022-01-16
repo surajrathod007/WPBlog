@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.surajrathod.wpblog.R
 import com.surajrathod.wpblog.adapters.RecyclerViewPostAdapter
+import com.surajrathod.wpblog.model.PostDetails
 
 
 class GenericPostsFragment : Fragment() {
@@ -36,7 +37,7 @@ class GenericPostsFragment : Fragment() {
             if (recyclerView is RecyclerView) {
                 with(recyclerView) {
                     layoutManager = LinearLayoutManager(context)
-                    adapter = RecyclerViewPostAdapter(fetchedPostList.filter { it.category == args.postCategory },1)
+                    adapter = RecyclerViewPostAdapter(fetchedPostList.filter { it.category == args.postCategory } as MutableList<PostDetails>,1)
                 }
             }
         }

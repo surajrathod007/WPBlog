@@ -10,8 +10,8 @@ import com.surajrathod.wpblog.fragments.fetchedPostList
 import com.surajrathod.wpblog.model.PostCategory
 import com.surajrathod.wpblog.model.PostDetails
 
-class CategoriesAdapter(val categoryList : List<PostCategory>) : RecyclerView.Adapter<CategoriesAdapter.ViewHolder>() {
-   var datalist = fetchedPostList as List<PostDetails>
+class CategoriesAdapter(val categoryList : MutableList<PostCategory>) : RecyclerView.Adapter<CategoriesAdapter.ViewHolder>() {
+
     class ViewHolder(val binding : CategoryViewholderBinding) : RecyclerView.ViewHolder(binding.root) {
 
     }
