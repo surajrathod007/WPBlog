@@ -33,7 +33,7 @@ val fetchedCategoryList = mutableListOf<PostCategory>()
 class DashboardFragment : Fragment() {
 
     lateinit var binding: FragmentDashboardBinding
-    var dataLoaded = false
+//    var dataLoaded = false
     var progress = 100
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,7 +52,7 @@ class DashboardFragment : Fragment() {
 
 //    binding.loadingCover.visibility=RelativeLayout.GONE // remove from comments while testing api etc
 
-        if(InternetStatus().checkForInternet(activity as Context) && !dataLoaded) {
+        if(InternetStatus().checkForInternet(activity as Context)/* && !dataLoaded*/) {
             fetchedCategoryList.clear()
             fetchedPostList.clear()
             val queuePosts = Volley.newRequestQueue(activity as Context)
@@ -101,7 +101,7 @@ class DashboardFragment : Fragment() {
                         }
                      progress = 1000
                     binding.loadingBar.progress = progress
-                    dataLoaded=true
+//                    dataLoaded=true
                     dataLoader()
                    val handler = Handler()
                     handler.postDelayed(Runnable {
@@ -115,9 +115,9 @@ class DashboardFragment : Fragment() {
                 }
             queuePosts.add(requestForPosts)
 
-        }else if(dataLoaded){
-            binding.loadingCover.visibility=RelativeLayout.GONE
-            dataLoader()
+//        }else if(dataLoaded){
+//            binding.loadingCover.visibility=RelativeLayout.GONE
+//            dataLoader()
 //            fetchedPostList.add(PostDetails(110,"dummy","img","12456",225,"ahgdsdha","uaold"))
 //            RecyclerViewPostAdapter(fetchedPostList,0).update()
         }else{
